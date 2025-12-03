@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "wallpaper_app",
-    "slug": "wallpaper_app",
+    "name": "mytodo_app",
+    "slug": "mytodo_app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "wallpaperapp",
+    "scheme": "mytodoapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -19,7 +19,8 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "windowSoftInputMode": "adjustResize"
     },
     "web": {
       "output": "static",
