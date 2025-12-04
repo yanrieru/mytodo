@@ -1,47 +1,90 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Swipeable } from "react-native-gesture-handler";
+import TaskMenu from "./TaskMenu";
 
 type TaskItemProps = {
+  id: string;
   time: string;
   title: string;
-  completed?: boolean;
+  completed: boolean;
+  onDelete: (id: string) => void;
+  onEdit: (id: string) => void;
+  onToggleCompleted: (id: string) => void;
 };
 
-export default function TaskItem({ time, title }: TaskItemProps) {
+export default function TaskItem({ id, time, title, completed, onDelete, onEdit, onToggleCompleted }: TaskItemProps) {
+  const [menuVisible, setMenuVisible] = useState(false);
+
   const renderRightActions = () => (
-    <View style={styles.rightContainer}>
-      <TouchableOpacity style={styles.deleteBox}>
+    <View style={styles.deleteWrapper}>
+      <TouchableOpacity style={styles.deleteBox} onPress={() => onDelete(id)}>
         <Ionicons name="trash-outline" size={24} color="#fff" />
       </TouchableOpacity>
     </View>
   );
 
   return (
-    <Swipeable overshootRight={false} renderRightActions={renderRightActions}>
-      <View style={styles.container}>
-        <View>
-          <Text style={styles.time}>{time}</Text>
-          <Text style={styles.title}>{title}</Text>
-        </View>
-        
-        <TouchableOpacity>
-          <Ionicons name="ellipsis-vertical" size={22} color="#ccc" />
-        </TouchableOpacity>
+    <>
+      <View style={styles.wrapper}>
+        <Swipeable overshootRight={false} renderRightActions={renderRightActions}>
+          <View style={styles.container}>
+            <View>
+              <Text style={styles.time}>{time}</Text>
+              <Text style={[styles.title, completed && styles.completed]}>{title}</Text>
+            </View>
+
+            <TouchableOpacity onPress={() => setMenuVisible(true)}>
+              <Ionicons name="ellipsis-vertical" size={22} color="#ccc" />
+            </TouchableOpacity>
+          </View>
+        </Swipeable>
       </View>
-    </Swipeable>
+
+      <TaskMenu
+        visible={menuVisible}
+        onClose={() => setMenuVisible(false)}
+        onEdit={() => {
+          setMenuVisible(false);
+          onEdit(id);
+        }}
+        onToggleCompleted={() => {
+          setMenuVisible(false);
+          onToggleCompleted(id);
+        }}
+        completed={completed}
+      />
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#726e6eff",
-    padding: 15,
+  wrapper: {
     borderRadius: 15,
+    overflow: "hidden", //  ⬅ ini yang bikin kedua box menyatu!
     marginBottom: 12,
+  },
+
+  container: {
+    backgroundColor: "#6E7070",
+    padding: 15,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+  },
+
+  deleteWrapper: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  deleteBox: {
+    backgroundColor: "#9b5de5",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 70,
+    height: "100%", //  ⬅ agar tingginya selalu sama dengan task box
   },
 
   time: {
@@ -56,17 +99,8 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 
-  rightContainer: {
-    justifyContent: "center",
-    marginBottom: 12,
-  },
-
-  deleteBox: {
-    backgroundColor: "#9b5de5",
-    justifyContent: "center",
-    alignItems: "center",
-    width: 70,
-    height: 70,
-    borderRadius: 15,
+  completed: {
+    textDecorationLine: "line-through",
+    opacity: 0.5,
   },
 });

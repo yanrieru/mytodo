@@ -1,7 +1,26 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Text, TouchableOpacity, View } from "react-native";
 
-export default function Header() {
+export default function Header({
+  onMenuPress,
+  onCalendarPress,
+}: {
+  onMenuPress: () => void;
+  onCalendarPress: () => void;
+}) {
+  const date = new Date();
+
+  // list nama hari & bulan
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  const dayName = days[date.getDay()];
+  const monthName = months[date.getMonth()];
+  const dayNumber = date.getDate();
+
   return (
     <View
       style={{
@@ -16,21 +35,25 @@ export default function Header() {
     >
       {/* LEFT SECTION */}
       <View style={{ flexDirection: "column" }}>
-        {/* Menu */}
-        <TouchableOpacity style={{ marginBottom: 10 }}>
+        <TouchableOpacity style={{ marginBottom: 10 }} onPress={onMenuPress}>
           <Ionicons name="menu" size={30} color="#ffffff" />
         </TouchableOpacity>
 
-        {/* Title */}
-        <Text style={{ fontSize: 30, fontWeight: "400", color: "#ffffff" }}>Today’s</Text>
-        <Text style={{ fontSize: 40, fontWeight: "700", color: "#ffffff" }}>Schedule</Text>
+        <Text style={{ fontSize: 30, fontWeight: "400", color: "#ffffff" }}>
+          Today’s
+        </Text>
+        <Text style={{ fontSize: 40, fontWeight: "800", color: "#ffffff" }}>
+          Schedule
+        </Text>
 
-        {/* Subtitle / Date */}
-        <Text style={{ fontSize: 18, color: "#ffffff", marginTop: 20 }}>Monday, December 1</Text>
+        {/* Tanggal otomatis */}
+        <Text style={{ fontSize: 18, color: "#ffffff", marginTop: 20 }}>
+          {dayName}, {monthName} {dayNumber}
+        </Text>
       </View>
 
-      {/* RIGHT SECTION (Calendar Icon) */}
-      <TouchableOpacity style={{ marginTop: 4 }}>
+      {/* CALENDAR BUTTON */}
+      <TouchableOpacity style={{ marginTop: 4 }} onPress={onCalendarPress}>
         <Ionicons name="calendar-outline" size={30} color="#ffffff" />
       </TouchableOpacity>
     </View>
