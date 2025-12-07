@@ -1,25 +1,20 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Text, TouchableOpacity, View } from "react-native";
+import { useLanguage } from "../src/locales/languange";
+import { useTheme } from "../src/theme/ThemeContext";
 
-export default function Header({
-  onMenuPress,
-  onCalendarPress,
-}: {
-  onMenuPress: () => void;
-  onCalendarPress: () => void;
-}) {
+export default function Header({ onMenuPress, onCalendarPress }: { onMenuPress: () => void; onCalendarPress: () => void }) {
   const date = new Date();
+  const { theme } = useTheme();
+  const { t } = useLanguage();
 
-  // list nama hari & bulan
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  const months = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
+  const days = t("days");
+  const months = t("months");
 
   const dayName = days[date.getDay()];
   const monthName = months[date.getMonth()];
   const dayNumber = date.getDate();
+  const year = date.getFullYear();
 
   return (
     <View
@@ -30,31 +25,24 @@ export default function Header({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "flex-start",
-        backgroundColor: "#54504F",
+        backgroundColor: theme.background,
       }}
     >
-      {/* LEFT SECTION */}
       <View style={{ flexDirection: "column" }}>
         <TouchableOpacity style={{ marginBottom: 10 }} onPress={onMenuPress}>
-          <Ionicons name="menu" size={30} color="#ffffff" />
+          <Ionicons name="menu" size={30} color={theme.text} />
         </TouchableOpacity>
 
-        <Text style={{ fontSize: 30, fontWeight: "400", color: "#ffffff" }}>
-          Today’s
-        </Text>
-        <Text style={{ fontSize: 40, fontWeight: "800", color: "#ffffff" }}>
-          Schedule
-        </Text>
-
-        {/* Tanggal otomatis */}
-        <Text style={{ fontSize: 18, color: "#ffffff", marginTop: 20 }}>
-          {dayName}, {monthName} {dayNumber}
+        <Text style={{ fontSize: 30, fontWeight: "400", color: theme.text }}>{t("today")}</Text>
+        <Text style={{ fontSize: 40, fontWeight: "800", color: theme.text }}>{t("activities")}</Text>
+       
+        <Text style={{ fontSize: 18, color: theme.text, marginTop: 20 }}>
+          {dayName}, {dayNumber} {monthName} {year}
         </Text>
       </View>
-
-      {/* CALENDAR BUTTON */}
+      
       <TouchableOpacity style={{ marginTop: 4 }} onPress={onCalendarPress}>
-        <Ionicons name="calendar-outline" size={30} color="#ffffff" />
+        <Ionicons name="calendar-outline" size={30} color={theme.text} />
       </TouchableOpacity>
     </View>
   );

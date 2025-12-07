@@ -1,12 +1,11 @@
-// src/theme/theme.ts
-
 export const lightTheme = {
   background: "#f5f5f5",
   card: "#ffffff",
   text: "#000000",
-  subtext: "#444444",
+  subtext: "#999",
   primary: "#4A90E2",
-  accent: "#54504F",
+  accent: "#ffffff",
+  bottombar: "#aaa",
 };
 
 export const darkTheme = {
@@ -15,7 +14,8 @@ export const darkTheme = {
   text: "#ffffff",
   subtext: "#dddddd",
   primary: "#4A90E2",
-  accent: "#ffffff",
+  accent: "#54504F",
+  bottombar: "#fff",
 };
 
 export type ThemeType = typeof lightTheme;

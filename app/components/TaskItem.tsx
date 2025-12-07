@@ -2,6 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Swipeable } from "react-native-gesture-handler";
+import { useTheme } from "../src/theme/ThemeContext";
 import TaskMenu from "./TaskMenu";
 
 type TaskItemProps = {
@@ -16,7 +17,58 @@ type TaskItemProps = {
 
 export default function TaskItem({ id, time, title, completed, onDelete, onEdit, onToggleCompleted }: TaskItemProps) {
   const [menuVisible, setMenuVisible] = useState(false);
+  const { theme } = useTheme();
 
+  const styles = StyleSheet.create({
+    wrapper: {
+      borderRadius: 15,
+      overflow: "hidden",
+      marginBottom: 12,
+      elevation: 2,
+      shadowColor: "#000",
+      shadowOpacity: 0.15,
+      shadowRadius: 6,
+      shadowOffset: { width: 0, height: 3 },
+    },
+
+    container: {
+      padding: 15,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      backgroundColor: theme.card,
+    },
+
+    deleteWrapper: {
+      justifyContent: "center",
+      alignItems: "center",
+    },
+
+    deleteBox: {
+      backgroundColor: "#ff0000ff",
+      justifyContent: "center",
+      alignItems: "center",
+      width: 70,
+      height: "100%",
+    },
+
+    time: {
+      color: theme.subtext,
+      fontSize: 13,
+    },
+
+    title: {
+      color: theme.text,
+      fontSize: 16,
+      marginTop: 4,
+      fontWeight: "500",
+    },
+
+    completed: {
+      textDecorationLine: "line-through",
+      opacity: 0.5,
+    },
+  });
   const renderRightActions = () => (
     <View style={styles.deleteWrapper}>
       <TouchableOpacity style={styles.deleteBox} onPress={() => onDelete(id)}>
@@ -36,7 +88,7 @@ export default function TaskItem({ id, time, title, completed, onDelete, onEdit,
             </View>
 
             <TouchableOpacity onPress={() => setMenuVisible(true)}>
-              <Ionicons name="ellipsis-vertical" size={22} color="#ccc" />
+              <Ionicons name="ellipsis-vertical" size={22} color={theme.text} />
             </TouchableOpacity>
           </View>
         </Swipeable>
@@ -58,49 +110,3 @@ export default function TaskItem({ id, time, title, completed, onDelete, onEdit,
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    borderRadius: 15,
-    overflow: "hidden", //  ⬅ ini yang bikin kedua box menyatu!
-    marginBottom: 12,
-  },
-
-  container: {
-    backgroundColor: "#6E7070",
-    padding: 15,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-
-  deleteWrapper: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  deleteBox: {
-    backgroundColor: "#9b5de5",
-    justifyContent: "center",
-    alignItems: "center",
-    width: 70,
-    height: "100%", //  ⬅ agar tingginya selalu sama dengan task box
-  },
-
-  time: {
-    color: "#eee",
-    fontSize: 13,
-  },
-
-  title: {
-    color: "#fff",
-    fontSize: 16,
-    marginTop: 4,
-    fontWeight: "500",
-  },
-
-  completed: {
-    textDecorationLine: "line-through",
-    opacity: 0.5,
-  },
-});

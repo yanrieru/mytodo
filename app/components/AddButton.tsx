@@ -12,7 +12,7 @@ export default function AddButton({ onPress, keyboardOffset }: { onPress: () => 
       ]}
     >
       <TouchableOpacity style={styles.button} onPress={onPress}>
-        <Ionicons name="add" size={32} color="#000" />
+        <Ionicons name="add" size={32} color="#fff" />
       </TouchableOpacity>
     </Animated.View>
   );
@@ -28,14 +28,14 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: "#00D1FF",
+    backgroundColor: "#4A90E2",
     justifyContent: "center",
     alignItems: "center",
 
-    elevation: 8,
+    elevation: 2,
     shadowColor: "#000",
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    shadowOffset: { width: 0, height: 2 },
   },
 });

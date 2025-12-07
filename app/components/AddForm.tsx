@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Animated, Keyboard, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import { useTheme } from "../src/theme/ThemeContext";
+import { useLanguage } from "../src/locales/languange";
 
 interface AddFormProps {
   open: boolean;
   keyboardOffset: Animated.Value;
-  onSubmit: (title: string, time: string) => void; // ⬅ kirim ke parent
+  onSubmit: (title: string, time: string) => void;
 }
 
 export default function AddForm({ open, keyboardOffset, onSubmit }: AddFormProps) {
@@ -13,6 +15,8 @@ export default function AddForm({ open, keyboardOffset, onSubmit }: AddFormProps
 
   const inputRef = useRef<TextInput>(null);
   const [text, setText] = useState("");
+  const { theme } = useTheme();
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (open) {
@@ -57,10 +61,34 @@ export default function AddForm({ open, keyboardOffset, onSubmit }: AddFormProps
     const minutes = now.getMinutes().toString().padStart(2, "0");
     const autoTime = `${hours}:${minutes}`;
 
-    onSubmit(text.trim(), autoTime); // kirim ke index.tsx
+    onSubmit(text.trim(), autoTime);
     setText("");
     Keyboard.dismiss();
   };
+
+  const styles = StyleSheet.create({
+    formPanel: {
+      position: "absolute",
+      width: 350,
+      height: 60,
+      backgroundColor: theme.card,
+      borderRadius: 30,
+      paddingHorizontal: 15,
+      justifyContent: "center",
+  
+      elevation: 2,
+      shadowColor: "#000",
+      shadowOpacity: 0.2,
+      shadowRadius: 2,
+      shadowOffset: { width: 0, height: 2 },
+    },
+  
+    input: {
+      flex: 1,
+      fontSize: 16,
+      color: theme.text,
+    },
+  });
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -78,44 +106,16 @@ export default function AddForm({ open, keyboardOffset, onSubmit }: AddFormProps
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <TextInput
             ref={inputRef}
-            placeholder="Tambah task…"
-            placeholderTextColor="#999"
+            placeholder={t("add_task")}
+            placeholderTextColor={theme.subtext}
             style={styles.input}
             value={text}
             onChangeText={setText}
             onSubmitEditing={sendTask} // ENTER untuk kirim
           />
-
-          {/* TOMBOL ADD */}
-          {/* <TouchableOpacity style={styles.addBtn} onPress={sendTask}>
-            <Text style={styles.addText}>Add</Text>
-          </TouchableOpacity> */}
         </View>
       </Animated.View>
     </TouchableWithoutFeedback>
   );
 }
 
-const styles = StyleSheet.create({
-  formPanel: {
-    position: "absolute",
-    width: 350,
-    height: 60,
-    backgroundColor: "#fff",
-    borderRadius: 30,
-    paddingHorizontal: 15,
-    justifyContent: "center",
-
-    elevation: 6,
-    shadowColor: "#000",
-    shadowOpacity: 0.15,
-    shadowRadius: 6,
-    shadowOffset: { width: 0, height: 3 },
-  },
-
-  input: {
-    flex: 1,
-    fontSize: 16,
-    color: "#000",
-  },
-});

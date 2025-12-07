@@ -1,10 +1,19 @@
 import { useMemo, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { useTheme } from "../src/theme/ThemeContext";
+import { useLanguage } from "../src/locales/languange";
 
 export default function CalendarStrip() {
   const today = new Date();
+  const { theme } = useTheme();
+  const { lang } = useLanguage();
 
-  // Generate 7 hari ke depan dimulai dari hari ini
+  const dayLabels = {
+    en: ["S", "M", "T", "W", "T", "F", "S"],
+    id: ["M", "S", "S", "R", "K", "J", "S"],
+  };
+
+  // Generate 7 hari ke depan
   const next7Days = useMemo(() => {
     return Array.from({ length: 7 }, (_, i) => {
       const date = new Date();
@@ -12,11 +21,11 @@ export default function CalendarStrip() {
 
       return {
         fullDate: date,
-        dayLabel: date.toLocaleDateString("en-US", { weekday: "short" }).charAt(0),
+        dayLabel: dayLabels[lang][date.getDay()],
         dateNumber: date.getDate(),
       };
     });
-  }, []);
+  }, [lang]);
 
   const [selectedDate, setSelectedDate] = useState(today.getDate());
 
@@ -26,10 +35,8 @@ export default function CalendarStrip() {
         <View style={{ flexDirection: "row", gap: 25 }}>
           {next7Days.map((item, index) => (
             <View key={index} style={{ alignItems: "center" }}>
-              {/* Label hari (M / T / W / ...) */}
-              <Text style={{ fontSize: 14, color: "#ccc", marginBottom: 8 }}>{item.dayLabel}</Text>
-
-              {/* Tanggal */}
+              <Text style={{ fontSize: 14, color: theme.text, marginBottom: 8 }}>{item.dayLabel}</Text>
+            
               <TouchableOpacity
                 onPress={() => setSelectedDate(item.dateNumber)}
                 style={{
@@ -38,13 +45,18 @@ export default function CalendarStrip() {
                   borderRadius: 20,
                   justifyContent: "center",
                   alignItems: "center",
-                  backgroundColor: item.dateNumber === selectedDate ? "#726e6eff" : "#eee",
+                  backgroundColor: item.dateNumber === selectedDate ? theme.primary : theme.card,
+                  elevation: 1,
+                  shadowColor: "#000",
+                  shadowOpacity: 0.1,
+                  shadowRadius: 1,
+                  shadowOffset: { width: 0, height: 1 },
                   // #1f1f1f
                 }}
               >
                 <Text
                   style={{
-                    color: item.dateNumber === selectedDate ? "#fff" : "#333",
+                    color: item.dateNumber === selectedDate ? theme.accent : theme.text,
                     fontWeight: "600",
                   }}
                 >

@@ -1,0 +1,33 @@
+{
+  "settings": "Settings",
+  "language": "Language",
+  "theme": "Theme",
+  "dark": "Dark",
+  "light": "Light",
+  "system": "System",
+  "use_system": "Use System",
+  "system_selected": "system selected",
+  "english": "English",
+  "indonesia": "Indonesian",
+
+  "back": "Back",
+  "cancel": "Cancel",
+  "save": "Save",
+  "menu": "Menu",
+  "about_app": "About App",
+
+  "search_task": "Search task...",
+  "no_result": "No result found",
+
+  "home": "Home",
+  "today": "Today's",
+  "activities": "Activities",
+  "days": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+  "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+
+  "add_task": "Add your task...",
+  "edit_task": "Edit Task",
+  "mark_completed": "Mark as Completed",
+  "mark_incomplete": "Mark as Incomplete",
+  "calendar": "Calendar"
+}

@@ -1,0 +1,33 @@
+{
+  "settings": "Pengaturan",
+  "language": "Bahasa",
+  "theme": "Tema",
+  "dark": "Gelap",
+  "light": "Terang",
+  "system": "Sistem",
+  "use_system": "Gunakan Sistem",
+  "system_selected": "sistem yang dipilih",
+  "english": "Bahasa Inggris",
+  "indonesia": "Bahasa Indonesia",
+
+  "back": "Kembali",
+  "cancel": "Batal",
+  "save": "Simpan",
+  "menu": "Menu",
+  "about_app": "Tentang Aplikasi",
+
+  "search_task": "Pencarian tugas...",
+  "no_result": "Tidak ada hasil",
+
+  "home": "Beranda",
+  "today": "Aktivitas",
+  "activities": "Hari ini",
+  "days": ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"],
+  "months": ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+
+  "add_task": "Tambah Tugas...",
+  "edit_task": "Edit Tugas",
+  "mark_completed": "Tandai Selesai",
+  "mark_incomplete": "Tandai Belum Selesai",
+  "calendar": "Kalender"
+}
