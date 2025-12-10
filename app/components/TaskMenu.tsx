@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Animated, Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useTheme } from "../src/theme/ThemeContext";
-import { useLanguage } from "../src/locales/languange";
+import { useLanguage } from "../../src/locales/languange";
+import { useTheme } from "../../src/theme/ThemeContext";
 
 type TaskMenuProps = {
   visible: boolean;

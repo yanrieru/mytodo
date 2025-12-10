@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { useTheme } from "../src/theme/ThemeContext";
-import { useLanguage } from "../src/locales/languange";
+import { useLanguage } from "../../src/locales/languange";
+import { useTheme } from "../../src/theme/ThemeContext";
 
 export default function CalendarStrip() {
   const today = new Date();
@@ -36,7 +36,7 @@ export default function CalendarStrip() {
           {next7Days.map((item, index) => (
             <View key={index} style={{ alignItems: "center" }}>
               <Text style={{ fontSize: 14, color: theme.text, marginBottom: 8 }}>{item.dayLabel}</Text>
-            
+
               <TouchableOpacity
                 onPress={() => setSelectedDate(item.dateNumber)}
                 style={{

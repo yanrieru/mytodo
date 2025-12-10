@@ -1,10 +1,10 @@
+import type { Href } from "expo-router";
 import { router } from "expo-router";
-import type { Href } from "expo-router"
 import { Dimensions, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, { useAnimatedStyle, withTiming } from "react-native-reanimated";
-import { useTheme } from "../src/theme/ThemeContext";
-import { useLanguage } from "../src/locales/languange";
+import { useLanguage } from "../../src/locales/languange";
+import { useTheme } from "../../src/theme/ThemeContext";
 
 const { width } = Dimensions.get("window");
 const SIDEBAR_WIDTH = width * 0.75; // ukuran sidebar 75% lebar layar
@@ -51,7 +51,7 @@ export default function Sidebar({ visible, onClose }: { visible: boolean; onClos
       paddingHorizontal: 20,
       zIndex: 20,
     },
-  
+
     backdrop: {
       position: "absolute",
       backgroundColor: "rgba(0,0,0,0.4)",
@@ -61,14 +61,14 @@ export default function Sidebar({ visible, onClose }: { visible: boolean; onClos
       bottom: 0,
       zIndex: 10,
     },
-  
+
     title: {
       color: theme.text,
       fontSize: 26,
       fontWeight: "700",
       marginBottom: 30,
     },
-    
+
     menuText: {
       color: theme.text,
       fontWeight: "400",
@@ -81,32 +81,32 @@ export default function Sidebar({ visible, onClose }: { visible: boolean; onClos
       top: 5,
       padding: 10,
     },
-  
+
     closeText: {
       fontSize: 32,
       fontWeight: "600",
       color: theme.text,
     },
-  
+
     menuItem: {
       paddingVertical: 15,
       borderBottomWidth: 2,
       borderBottomColor: theme.bottombar,
     },
   });
-  
+
   return (
     <>
       {visible && <TouchableOpacity activeOpacity={1} onPress={onClose} style={styles.backdrop} />}
-     
+
       <GestureDetector gesture={swipeGesture}>
         <Animated.View style={[styles.sidebar, animatedStyle]}>
           <TouchableOpacity style={styles.closeButton} onPress={onClose}>
             <Text style={styles.closeText}>×</Text>
           </TouchableOpacity>
-          
+
           <Text style={styles.title}>Menu</Text>
-        
+
           <TouchableOpacity style={styles.menuItem} onPress={() => goTo("/tasks/settings")}>
             <Text style={styles.menuText}>{t("settings")}</Text>
           </TouchableOpacity>
@@ -119,4 +119,3 @@ export default function Sidebar({ visible, onClose }: { visible: boolean; onClos
     </>
   );
 }
-

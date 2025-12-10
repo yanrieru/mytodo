@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Text, TouchableOpacity, View } from "react-native";
-import { useLanguage } from "../src/locales/languange";
-import { useTheme } from "../src/theme/ThemeContext";
+import { useLanguage } from "../../src/locales/languange";
+import { useTheme } from "../../src/theme/ThemeContext";
 
 export default function Header({ onMenuPress, onCalendarPress }: { onMenuPress: () => void; onCalendarPress: () => void }) {
   const date = new Date();
@@ -35,12 +35,12 @@ export default function Header({ onMenuPress, onCalendarPress }: { onMenuPress: 
 
         <Text style={{ fontSize: 30, fontWeight: "400", color: theme.text }}>{t("today")}</Text>
         <Text style={{ fontSize: 40, fontWeight: "800", color: theme.text }}>{t("activities")}</Text>
-       
+
         <Text style={{ fontSize: 18, color: theme.text, marginTop: 20 }}>
           {dayName}, {dayNumber} {monthName} {year}
         </Text>
       </View>
-      
+
       <TouchableOpacity style={{ marginTop: 4 }} onPress={onCalendarPress}>
         <Ionicons name="calendar-outline" size={30} color={theme.text} />
       </TouchableOpacity>

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Animated, Keyboard, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
-import { useTheme } from "../src/theme/ThemeContext";
-import { useLanguage } from "../src/locales/languange";
+import { Animated, Keyboard, StyleSheet, TextInput, TouchableWithoutFeedback, View } from "react-native";
+import { useLanguage } from "../../src/locales/languange";
+import { useTheme } from "../../src/theme/ThemeContext";
 
 interface AddFormProps {
   open: boolean;
@@ -75,14 +75,14 @@ export default function AddForm({ open, keyboardOffset, onSubmit }: AddFormProps
       borderRadius: 30,
       paddingHorizontal: 15,
       justifyContent: "center",
-  
+
       elevation: 2,
       shadowColor: "#000",
       shadowOpacity: 0.2,
       shadowRadius: 2,
       shadowOffset: { width: 0, height: 2 },
     },
-  
+
     input: {
       flex: 1,
       fontSize: 16,
@@ -118,4 +118,3 @@ export default function AddForm({ open, keyboardOffset, onSubmit }: AddFormProps
     </TouchableWithoutFeedback>
   );
 }
-

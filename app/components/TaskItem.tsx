@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Swipeable } from "react-native-gesture-handler";
-import { useTheme } from "../src/theme/ThemeContext";
+import { useTheme } from "../../src/theme/ThemeContext";
 import TaskMenu from "./TaskMenu";
 
 type TaskItemProps = {
@@ -26,9 +26,9 @@ export default function TaskItem({ id, time, title, completed, onDelete, onEdit,
       marginBottom: 12,
       elevation: 2,
       shadowColor: "#000",
-      shadowOpacity: 0.15,
-      shadowRadius: 6,
-      shadowOffset: { width: 0, height: 3 },
+      shadowOpacity: 0.2,
+      shadowRadius: 2,
+      shadowOffset: { width: 0, height: 2 },
     },
 
     container: {

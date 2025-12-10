@@ -1,12 +1,12 @@
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Calendar, LocaleConfig } from "react-native-calendars";
-import { useLanguage } from "../src/locales/languange";
-import { useTheme } from "../src/theme/ThemeContext";
+import { useLanguage } from "../../src/locales/languange";
+import { useTheme } from "../../src/theme/ThemeContext";
 
 export default function CalendarModal({ visible, onClose }: { visible: boolean; onClose: () => void }) {
   const { theme } = useTheme();
   const { t, lang } = useLanguage();
-  
+
   LocaleConfig.locales["id"] = {
     monthNames: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
     monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"],

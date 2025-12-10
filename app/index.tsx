@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { Animated, Keyboard, ScrollView, Text, TouchableWithoutFeedback, View } from "react-native";
-import { useTheme } from "./src/theme/ThemeContext";
+import { useTheme } from "../src/theme/ThemeContext";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import AddButton from "./components/AddButton";
+import AddForm from "./components/AddForm";
 import CalendarModal from "./components/CalendarModal";
 import CalendarStrip from "./components/CalendarStrip";
+import EditModal from "./components/EditModal";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import Sidebar from "./components/SideBar";
 import TaskItem from "./components/TaskItem";
-import AddButton from "./components/AddButton";
-import AddForm from "./components/AddForm";
-import EditModal from "./components/EditModal";
 
 function getCurrentTime() {
   const now = new Date();
@@ -134,7 +134,7 @@ export default function Home() {
           <SearchBar value={searchQuery} onChange={setSearchQuery} />
         </View>
       </TouchableWithoutFeedback>
-    
+
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 120 }} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
         <View style={{ marginTop: 0, paddingHorizontal: 20 }}>
           {searchQuery.length > 0 && filteredTasks.length === 0 && (

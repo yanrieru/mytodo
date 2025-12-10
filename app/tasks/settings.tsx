@@ -2,9 +2,9 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
-import { useLanguage } from "../src/locales/languange";
-import { useTheme } from "../src/theme/ThemeContext";
-import { useThemeSettings } from "../src/theme/useThemeSettings";
+import { useLanguage } from "../../src/locales/languange";
+import { useTheme } from "../../src/theme/ThemeContext";
+import { useThemeSettings } from "../../src/theme/useThemeSettings";
 
 export default function Settings() {
   const router = useRouter();
@@ -120,7 +120,7 @@ export default function Settings() {
             </TouchableOpacity>
           </Animated.View>
         </View>
-        
+
         <View style={styles.itemBox}>
           <TouchableOpacity onPress={toggleLangDropdown}>
             <View style={styles.row}>
@@ -139,7 +139,7 @@ export default function Settings() {
             >
               <Text style={styles.dropdownText}>{t("english")}</Text>
             </TouchableOpacity>
-           
+
             <TouchableOpacity
               style={styles.dropdownItem}
               onPress={() => {

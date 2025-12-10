@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { TextInput, View } from "react-native";
-import { useTheme } from "../src/theme/ThemeContext";
-import { useLanguage } from "../src/locales/languange";
+import { useLanguage } from "../../src/locales/languange";
+import { useTheme } from "../../src/theme/ThemeContext";
 
 export default function SearchBar({ value, onChange }: { value: string; onChange: (text: string) => void }) {
   const { theme } = useTheme();
