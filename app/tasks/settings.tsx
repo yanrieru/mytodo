@@ -1,10 +1,14 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
-import { useState } from "react";
-import { StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Alert, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+
 import { useLanguage } from "../../src/locales/languange";
 import { useTheme } from "../../src/theme/ThemeContext";
 import { useThemeSettings } from "../../src/theme/useThemeSettings";
+
+import { registerForNotifications } from "@/src/notifications/registerForNotifications";
 
 export default function Settings() {
   const router = useRouter();
@@ -12,33 +16,57 @@ export default function Settings() {
   const { mode, setMode } = useThemeSettings();
   const { lang, setLang, t } = useLanguage();
 
-  // dropdown theme
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownHeight = useSharedValue(0);
-
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
     dropdownHeight.value = withTiming(dropdownOpen ? 0 : 50, { duration: 250 });
   };
-
   const animatedStyle = useAnimatedStyle(() => ({
     height: dropdownHeight.value,
     opacity: dropdownHeight.value === 0 ? 0 : 1,
   }));
-
-  // dropdown language
+  
   const [langOpen, setLangOpen] = useState(false);
   const langHeight = useSharedValue(0);
-
   const toggleLangDropdown = () => {
     setLangOpen(!langOpen);
     langHeight.value = withTiming(langOpen ? 0 : 100, { duration: 250 });
   };
-
   const langAnimatedStyle = useAnimatedStyle(() => ({
     height: langHeight.value,
     opacity: langHeight.value === 0 ? 0 : 1,
   }));
+ 
+  const [notifOpen, setNotifOpen] = useState(false);
+  const notifHeight = useSharedValue(0);
+  const toggleNotifDropdown = () => {
+    setNotifOpen(!notifOpen);
+    notifHeight.value = withTiming(notifOpen ? 0 : 60, { duration: 250 });
+  };
+  const notifAnimatedStyle = useAnimatedStyle(() => ({
+    height: notifHeight.value,
+    opacity: notifHeight.value === 0 ? 0 : 1,
+  }));
+
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+
+  useEffect(() => {
+    AsyncStorage.getItem("notificationsEnabled").then((value) => {
+      setNotificationsEnabled(value === "true");
+    });
+  }, []);
+
+  const handleEnableNotifications = async () => {
+    const enabled = await registerForNotifications();
+    setNotificationsEnabled(enabled);
+
+    if (!enabled) {
+      Alert.alert("Permission Denied", "Notifications permission not granted!");
+    } else {
+      Alert.alert("Success", "Notifications enabled");
+    }
+  };
 
   const styles = StyleSheet.create({
     container: { flex: 1, backgroundColor: theme.background },
@@ -64,6 +92,12 @@ export default function Settings() {
       shadowRadius: 2,
       shadowOffset: { width: 0, height: 2 },
     },
+    itemTitle: {
+      fontSize: 15,
+      color: theme.text,
+      fontWeight: "700",
+      marginBottom: 10,
+    },
     row: {
       flexDirection: "row",
       justifyContent: "space-between",
@@ -77,20 +111,18 @@ export default function Settings() {
 
   return (
     <View style={styles.container}>
-      {/* HEADER */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <Text style={styles.back}>&lt; {t("back")}</Text>
         </TouchableOpacity>
-
         <Text style={styles.title}>{t("settings")}</Text>
-
         <View style={{ width: 50 }} />
       </View>
 
       <View style={styles.content}>
-        {/* THEME */}
         <View style={styles.itemBox}>
+          <Text style={styles.itemTitle}>{t("theme")}</Text>
+
           <View style={styles.row}>
             <Text style={styles.itemText}>{t("light")}</Text>
             <Switch value={mode === "light"} onValueChange={() => setMode("light")} />
@@ -120,7 +152,7 @@ export default function Settings() {
             </TouchableOpacity>
           </Animated.View>
         </View>
-
+    
         <View style={styles.itemBox}>
           <TouchableOpacity onPress={toggleLangDropdown}>
             <View style={styles.row}>
@@ -149,6 +181,22 @@ export default function Settings() {
             >
               <Text style={styles.dropdownText}>{t("indonesia")}</Text>
             </TouchableOpacity>
+          </Animated.View>
+        </View>
+     
+        <View style={styles.itemBox}>
+          <TouchableOpacity onPress={toggleNotifDropdown}>
+            <View style={styles.row}>
+              <Text style={styles.itemText}>{t("notifications")}</Text>
+              <Text style={[styles.itemText, { opacity: 0.6 }]}>{notificationsEnabled ? "ON" : "OFF"}</Text>
+            </View>
+          </TouchableOpacity>
+
+          <Animated.View style={[notifAnimatedStyle, { overflow: "hidden" }]}>
+            <TouchableOpacity style={styles.dropdownItem} onPress={handleEnableNotifications}>
+              <Text style={styles.dropdownText}>{notificationsEnabled ? t("notifications_enable") : t("enable_notifications")}</Text>
+            </TouchableOpacity> 
+            {/* t("mark_incomplete") */}
           </Animated.View>
         </View>
       </View>

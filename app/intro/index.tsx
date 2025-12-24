@@ -7,12 +7,12 @@ export default function IntroPage() {
 
   const finishIntro = async () => {
     await AsyncStorage.setItem("hasSeenIntro", "true");
-    router.replace("/"); // kembali ke home
+    router.replace("/"); 
   };
 
   return (
     <View style={styles.container}>
-      <Image source={require("../../assets/images/mytodos.png")} style={styles.image} />
+      <Image source={require("../../assets/images/mytodointro.png")} style={styles.image} />
 
       <Text style={styles.title}>Time to List with MyTodo</Text>
       <Text style={styles.description}>Manage your daily tasks easily and efficiently</Text>

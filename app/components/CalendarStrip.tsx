@@ -13,7 +13,7 @@ export default function CalendarStrip() {
     id: ["M", "S", "S", "R", "K", "J", "S"],
   };
 
-  // Generate 7 hari ke depan
+  // generate ke 7 hari ke depan
   const next7Days = useMemo(() => {
     return Array.from({ length: 7 }, (_, i) => {
       const date = new Date();

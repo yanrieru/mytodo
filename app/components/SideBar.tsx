@@ -7,13 +7,12 @@ import { useLanguage } from "../../src/locales/languange";
 import { useTheme } from "../../src/theme/ThemeContext";
 
 const { width } = Dimensions.get("window");
-const SIDEBAR_WIDTH = width * 0.75; // ukuran sidebar 75% lebar layar
+const SIDEBAR_WIDTH = width * 0.75;
 
 export default function Sidebar({ visible, onClose }: { visible: boolean; onClose: () => void }) {
   const { theme } = useTheme();
   const { t } = useLanguage();
-
-  // Animasi posisi X sidebar
+  
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [
@@ -23,17 +22,15 @@ export default function Sidebar({ visible, onClose }: { visible: boolean; onClos
       ],
     };
   });
-
-  // Swipe gesture untuk tutup
+  
   const swipeGesture = Gesture.Pan().onUpdate((e) => {
     if (e.translationX < -50) {
       onClose();
     }
   });
-
-  // Handler navigate
+ 
   const goTo = (path: Href) => {
-    onClose(); // tutup sidebar dulu
+    onClose();
     router.push(path);
   };
 

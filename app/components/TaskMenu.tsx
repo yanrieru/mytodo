@@ -9,9 +9,10 @@ type TaskMenuProps = {
   onEdit: () => void;
   onToggleCompleted: () => void;
   completed: boolean;
+  onSetReminder: () => void; // ⭐ tambahan
 };
 
-export default function TaskMenu({ visible, onClose, onEdit, onToggleCompleted, completed }: TaskMenuProps) {
+export default function TaskMenu({ visible, onClose, onEdit, onToggleCompleted, completed, onSetReminder }: TaskMenuProps) {
   const fade = useRef(new Animated.Value(0)).current;
   const { theme } = useTheme();
   const { t } = useLanguage();
@@ -52,6 +53,7 @@ export default function TaskMenu({ visible, onClose, onEdit, onToggleCompleted, 
   return (
     <Modal transparent visible={visible} animationType="fade">
       <Animated.View style={[styles.overlay, { opacity: fade }]}>
+        {/* Tap background to close */}
         <TouchableOpacity style={{ flex: 1 }} onPress={onClose} />
 
         <View style={styles.menuBox}>
@@ -59,6 +61,9 @@ export default function TaskMenu({ visible, onClose, onEdit, onToggleCompleted, 
             <Text style={styles.menuText}>{t("edit_task")}</Text>
           </TouchableOpacity>
 
+          <TouchableOpacity style={styles.menuItem} onPress={onSetReminder}>
+            <Text style={styles.menuText}>{t("set_reminder")}</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.menuItem} onPress={onToggleCompleted}>
             <Text style={styles.menuText}>{completed ? t("mark_incomplete") : t("mark_completed")}</Text>
           </TouchableOpacity>

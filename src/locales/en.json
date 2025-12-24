@@ -9,12 +9,22 @@
   "system_selected": "system selected",
   "english": "English",
   "indonesia": "Indonesian",
-
+  "notifications": "Notifications",
+  "notifications_enable": "Notifications Enabled",
+  "enable_notifications": "Enable Notifications",
+  
   "back": "Back",
   "cancel": "Cancel",
   "save": "Save",
   "menu": "Menu",
+
   "about_app": "About App",
+  "tagline": "Organize your day. Boost your productivity.",
+  "what_is_mytodo": "What is MyTodo",
+  "description1": "MyTodo is a simple and modern task manager built with React Native + Expo. It helps you stay organized with clean UI, daily reminders, task filtering, and quick editing.",
+  "why_built": "Why Built It",
+  "description2": "Focuses on simplicity no distractions, just your tasks. Our goal is to help you maintain a productive and stress free workflow.",
+  "made_with": "Made With",
 
   "search_task": "Search task...",
   "no_result": "No result found",
@@ -29,5 +39,8 @@
   "edit_task": "Edit Task",
   "mark_completed": "Mark as Completed",
   "mark_incomplete": "Mark as Incomplete",
-  "calendar": "Calendar"
+  "calendar": "Calendar",
+
+  "set_reminder": "Set Reminder",
+  "reminder_date_label": "Reminder Date and time"
 }

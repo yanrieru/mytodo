@@ -22,8 +22,7 @@ export default function CalendarModal({ visible, onClose }: { visible: boolean; 
     dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
     today: "Today",
   };
-
-  // apply bahasa
+  
   LocaleConfig.defaultLocale = lang;
 
   const styles = StyleSheet.create({

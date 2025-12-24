@@ -9,12 +9,22 @@
   "system_selected": "sistem yang dipilih",
   "english": "Bahasa Inggris",
   "indonesia": "Bahasa Indonesia",
+  "notifications": "Notifikasi",
+  "notifications_enable": "Notifikasi diaktifkan",
+  "enable_notifications": "Aktifkan Notifikasi",
 
   "back": "Kembali",
   "cancel": "Batal",
   "save": "Simpan",
   "menu": "Menu",
+
   "about_app": "Tentang Aplikasi",
+  "tagline": "Atur hari mu. Tingkatkan produktivitas mu.",
+  "what_is_mytodo": "Apa itu MyTodo?",
+  "description1": "MyTodo adalah aplikasi pengelola tugas yang sederhana dan modern, dibangun menggunakan React Native + Expo. Aplikasi ini membantu Anda tetap terorganisir dengan antarmuka pengguna yang bersih, pengingat harian, penyaringan tugas, dan pengeditan cepat.",
+  "why_built": "Mengapa Dibuat?",
+  "description2": "Berfokus pada kesederhanaan tanpa gangguan, hanya tugas-tugas Anda. Tujuan kami adalah membantu Anda menjaga alur kerja yang produktif dan bebas stres.",
+  "made_with": "Dibuat dengan",
 
   "search_task": "Pencarian tugas...",
   "no_result": "Tidak ada hasil",
@@ -29,5 +39,8 @@
   "edit_task": "Edit Tugas",
   "mark_completed": "Tandai Selesai",
   "mark_incomplete": "Tandai Belum Selesai",
-  "calendar": "Kalender"
+  "calendar": "Kalender",
+
+  "set_reminder": "Atur Pengingat",
+  "reminder_date_label": "Pengingat Tanggal dan Waktu"
 }

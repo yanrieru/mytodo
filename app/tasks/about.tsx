@@ -94,7 +94,6 @@ export default function About() {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <Text style={styles.back}>⟨ {t("back")}</Text>
@@ -102,31 +101,26 @@ export default function About() {
         <Text style={styles.title}>{t("about_app")}</Text>
         <View style={{ width: 50 }} />
       </View>
-
-      {/* Content */}
+     
       <View style={styles.content}>
-        {/* Doodle Icon */}
         <View style={styles.doodleContainer}>
           <Image source={require("../../assets/images/stikers.gif")} style={{ width: 120, height: 120, resizeMode: "contain", marginBottom: 10 }} />
           <Text style={styles.appName}>MyTodo</Text>
-          <Text style={styles.tagline}>Organize your day. Boost your productivity.</Text>
+          <Text style={styles.tagline}>{t("tagline")}</Text>
         </View>
-
-        {/* Card 1 */}
+       
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>What is MyTodo?</Text>
-          <Text style={styles.cardText}>MyTodo is a simple and modern task manager built with React Native + Expo. It helps you stay organized with clean UI, daily reminders, task filtering, and quick editing.</Text>
+          <Text style={styles.cardTitle}>{t("what_is_mytodo")}</Text>
+          <Text style={styles.cardText}>{t("description1")}</Text>
         </View>
-
-        {/* Card 2 */}
+      
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>Why Built It</Text>
-          <Text style={styles.cardText}>Taskly focuses on simplicity no distractions, just your tasks. Our goal is to help you maintain a productive and stress free workflow.</Text>
+          <Text style={styles.cardTitle}>{t("why_built")}</Text>
+          <Text style={styles.cardText}>{t("description2")}</Text>
         </View>
-
-        {/* Card 3 */}
+        
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>Made With</Text>
+          <Text style={styles.cardTitle}>{t("made_with")}</Text>
           <Text style={styles.cardText}>
             ⚡ React Native{`\n`}
             🚀 Expo Router{`\n`}

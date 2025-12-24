@@ -48,7 +48,7 @@ export default function AddForm({ open, keyboardOffset, onSubmit }: AddFormProps
         }),
       ]).start(() => {
         Keyboard.dismiss();
-        setText(""); // reset input saat panel tertutup
+        setText(""); 
       });
     }
   }, [open]);
@@ -111,7 +111,7 @@ export default function AddForm({ open, keyboardOffset, onSubmit }: AddFormProps
             style={styles.input}
             value={text}
             onChangeText={setText}
-            onSubmitEditing={sendTask} // ENTER untuk kirim
+            onSubmitEditing={sendTask} 
           />
         </View>
       </Animated.View>

@@ -4,14 +4,14 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import useIntro from "../src/hooks/useIntro";
 import { LanguageProvider } from "../src/locales/languange";
 import { ThemeProvider } from "../src/theme/ThemeContext";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function RootLayout() {
   const router = useRouter();
   const { loading, isFirstLaunch } = useIntro();
 
   useEffect(() => {
-    AsyncStorage.removeItem("hasSeenIntro");
+    // AsyncStorage.removeItem("hasSeenIntro");
     if (!loading) {
       if (isFirstLaunch) router.replace("/intro");
     }

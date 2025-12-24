@@ -13,11 +13,21 @@ type TaskItemProps = {
   onDelete: (id: string) => void;
   onEdit: (id: string) => void;
   onToggleCompleted: (id: string) => void;
+  onSetReminder: (id: string) => void;
 };
 
-export default function TaskItem({ id, time, title, completed, onDelete, onEdit, onToggleCompleted }: TaskItemProps) {
-  const [menuVisible, setMenuVisible] = useState(false);
+export default function TaskItem({
+  id,
+  time,
+  title,
+  completed,
+  onDelete,
+  onEdit,
+  onToggleCompleted,
+  onSetReminder
+}: TaskItemProps) {
   const { theme } = useTheme();
+  const [menuVisible, setMenuVisible] = useState(false);
 
   const styles = StyleSheet.create({
     wrapper: {
@@ -30,7 +40,6 @@ export default function TaskItem({ id, time, title, completed, onDelete, onEdit,
       shadowRadius: 2,
       shadowOffset: { width: 0, height: 2 },
     },
-
     container: {
       padding: 15,
       flexDirection: "row",
@@ -38,37 +47,33 @@ export default function TaskItem({ id, time, title, completed, onDelete, onEdit,
       alignItems: "center",
       backgroundColor: theme.card,
     },
-
     deleteWrapper: {
       justifyContent: "center",
       alignItems: "center",
     },
-
     deleteBox: {
-      backgroundColor: "#ff0000ff",
+      backgroundColor: "#ff0000",
       justifyContent: "center",
       alignItems: "center",
       width: 70,
       height: "100%",
     },
-
     time: {
       color: theme.subtext,
       fontSize: 13,
     },
-
     title: {
       color: theme.text,
       fontSize: 16,
       marginTop: 4,
       fontWeight: "500",
     },
-
     completed: {
       textDecorationLine: "line-through",
       opacity: 0.5,
     },
   });
+
   const renderRightActions = () => (
     <View style={styles.deleteWrapper}>
       <TouchableOpacity style={styles.deleteBox} onPress={() => onDelete(id)}>
@@ -93,13 +98,17 @@ export default function TaskItem({ id, time, title, completed, onDelete, onEdit,
           </View>
         </Swipeable>
       </View>
-
+      
       <TaskMenu
         visible={menuVisible}
         onClose={() => setMenuVisible(false)}
         onEdit={() => {
           setMenuVisible(false);
           onEdit(id);
+        }}
+        onSetReminder={() => {
+          setMenuVisible(false);
+          onSetReminder(id);
         }}
         onToggleCompleted={() => {
           setMenuVisible(false);
