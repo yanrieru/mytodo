@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Alert, Animated, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, Animated, KeyboardAvoidingView, Modal, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useLanguage } from "../../src/locales/languange";
 import { scheduleTaskReminder } from "../../src/notifications/scheduleTaskReminder";
 import { useTheme } from "../../src/theme/ThemeContext";
@@ -142,26 +142,28 @@ export default function ReminderModal({ visible, onClose, reminderDate, setRemin
 
   return (
     <Modal visible={visible} transparent animationType="fade">
-      <View style={styles.overlay}>
-        <TouchableOpacity style={{ flex: 1 }} onPress={onClose} />
-        <Animated.View style={[styles.box, { transform: [{ translateY: slide }] }]}>
-          <Text style={styles.label}>{t("set_reminder")}</Text>
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
+        <View style={styles.overlay}>
+          <TouchableOpacity style={{ flex: 1 }} onPress={onClose} />
+          <Animated.View style={[styles.box, { transform: [{ translateY: slide }] }]}>
+            <Text style={styles.label}>{t("set_reminder")}</Text>
 
-          <Text style={styles.inputLabel}>{t("reminder_date_label") ?? "Reminder Date & Time"}</Text>
+            <Text style={styles.inputLabel}>{t("reminder_date_label") ?? "Reminder Date & Time"}</Text>
 
-          <TextInput style={styles.input} placeholder="YYYY-MM-DD HH:MM" placeholderTextColor={theme.subtext} value={reminderDate} onChangeText={setReminderDate} editable={!loading} />
+            <TextInput style={styles.input} placeholder="YYYY-MM-DD HH:MM" placeholderTextColor={theme.subtext} value={reminderDate} onChangeText={setReminderDate} editable={!loading} />
 
-          <View style={styles.buttons}>
-            <TouchableOpacity style={styles.cancel} onPress={onClose} disabled={loading}>
-              <Text style={styles.cancelText}>{t("cancel")}</Text>
-            </TouchableOpacity>
+            <View style={styles.buttons}>
+              <TouchableOpacity style={styles.cancel} onPress={onClose} disabled={loading}>
+                <Text style={styles.cancelText}>{t("cancel")}</Text>
+              </TouchableOpacity>
 
-            <TouchableOpacity style={styles.save} onPress={handleSave} disabled={loading}>
-              <Text style={styles.saveText}>{loading ? t("saving") ?? "Saving..." : t("save")}</Text>
-            </TouchableOpacity>
-          </View>
-        </Animated.View>
-      </View>
+              <TouchableOpacity style={styles.save} onPress={handleSave} disabled={loading}>
+                <Text style={styles.saveText}>{loading ? (t("saving") ?? "Saving...") : t("save")}</Text>
+              </TouchableOpacity>
+            </View>
+          </Animated.View>
+        </View>
+      </KeyboardAvoidingView>
     </Modal>
   );
 }

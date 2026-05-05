@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Animated, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Animated, KeyboardAvoidingView, Modal, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useLanguage } from "../../src/locales/languange";
 import { useTheme } from "../../src/theme/ThemeContext";
 
@@ -33,7 +33,7 @@ export default function EditTaskModal({ visible, onClose, onSave, initialTitle }
   const styles = StyleSheet.create({
     overlay: {
       flex: 1,
-      backgroundColor: "rgba(0, 0, 0, 0.45)", 
+      backgroundColor: "rgba(0, 0, 0, 0.45)",
       justifyContent: "flex-end",
     },
 
@@ -109,30 +109,32 @@ export default function EditTaskModal({ visible, onClose, onSave, initialTitle }
 
   return (
     <Modal visible={visible} transparent animationType="fade">
-      <View style={styles.overlay}>
-        <TouchableOpacity style={{ flex: 1 }} onPress={onClose} />
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
+        <View style={styles.overlay}>
+          <TouchableOpacity style={{ flex: 1 }} onPress={onClose} />
 
-        <Animated.View style={[styles.box, { transform: [{ translateY: slide }] }]}>
-          <Text style={styles.label}>{t("edit_task")}</Text>
+          <Animated.View style={[styles.box, { transform: [{ translateY: slide }] }]}>
+            <Text style={styles.label}>{t("edit_task")}</Text>
 
-          <TextInput style={styles.input} value={text} onChangeText={setText} placeholder="Task title…" placeholderTextColor={theme.subtext} />
+            <TextInput style={styles.input} value={text} onChangeText={setText} placeholder="Task title…" placeholderTextColor={theme.subtext} />
 
-          <View style={styles.buttons}>
-            <TouchableOpacity style={styles.cancel} onPress={onClose}>
-              <Text style={styles.cancelText}>{t("cancel")}</Text>
-            </TouchableOpacity>
+            <View style={styles.buttons}>
+              <TouchableOpacity style={styles.cancel} onPress={onClose}>
+                <Text style={styles.cancelText}>{t("cancel")}</Text>
+              </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.save}
-              onPress={() => {
-                if (text.trim()) onSave(text.trim());
-              }}
-            >
-              <Text style={styles.saveText}>{t("save")}</Text>
-            </TouchableOpacity>
-          </View>
-        </Animated.View>
-      </View>
+              <TouchableOpacity
+                style={styles.save}
+                onPress={() => {
+                  if (text.trim()) onSave(text.trim());
+                }}
+              >
+                <Text style={styles.saveText}>{t("save")}</Text>
+              </TouchableOpacity>
+            </View>
+          </Animated.View>
+        </View>
+      </KeyboardAvoidingView>
     </Modal>
   );
 }
