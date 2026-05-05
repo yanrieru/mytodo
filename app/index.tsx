@@ -15,7 +15,7 @@ import AddButton from "./components/AddButton";
 import AddForm from "./components/AddForm";
 import CalendarModal from "./components/CalendarModal";
 import CalendarStrip from "./components/CalendarStrip";
-import EditModal from "./components/EditModal";
+import EditTaskModal from "./components/EditTaskModal";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import Sidebar from "./components/SideBar";
@@ -126,19 +126,19 @@ export default function Home() {
   };
   
   // Edit Task
-  const openEditModal = (task) => {
+  const openEditTaskModal = (task) => {
     setSelectedTask(task);
     setEditVisible(true);
   };
 
-  const closeEditModal = () => {
+  const closeEditTaskModal = () => {
     setEditVisible(false);
     setSelectedTask(null);
   };
 
   const handleSaveEdit = (id: string, newTitle: string) => {
     editTask(id, newTitle);
-    closeEditModal();
+    closeEditTaskModal();
   };
  
   // Set Reminder
@@ -214,7 +214,7 @@ export default function Home() {
               time={task.time}
               title={task.title}
               completed={task.completed}
-              onEdit={() => openEditModal(task)}
+              onEdit={() => openEditTaskModal(task)}
               onToggleCompleted={() => toggleComplete(task.id)}
               onDelete={() => handleDeleteTask(task.id)}
               onSetReminder={handleSetReminder}
@@ -224,9 +224,9 @@ export default function Home() {
       </ScrollView>
       
       {selectedTask && (
-        <EditModal
+        <EditTaskModal
           visible={editVisible}
-          onClose={closeEditModal}
+          onClose={closeEditTaskModal}
           initialTitle={selectedTask.title}
           onSave={(newTitle) => handleSaveEdit(selectedTask.id, newTitle)}
         />

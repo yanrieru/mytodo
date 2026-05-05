@@ -3,14 +3,14 @@ import { Animated, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } 
 import { useLanguage } from "../../src/locales/languange";
 import { useTheme } from "../../src/theme/ThemeContext";
 
-type EditModalProps = {
+type EditTaskModalProps = {
   visible: boolean;
   onClose: () => void;
   onSave: (newTitle: string) => void;
   initialTitle: string;
 };
 
-export default function EditModal({ visible, onClose, onSave, initialTitle }: EditModalProps) {
+export default function EditTaskModal({ visible, onClose, onSave, initialTitle }: EditTaskModalProps) {
   const [text, setText] = useState(initialTitle);
   const slide = useRef(new Animated.Value(300)).current;
   const { theme } = useTheme();
